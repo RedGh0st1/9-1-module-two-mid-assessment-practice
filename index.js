@@ -41,7 +41,16 @@ const characters = require('./swapi');
  *
  */
 
-function listAllCharacters() {}
+function listAllCharacters(characters) {
+if (characters.length === 0) {
+  throw `Character name ERROR!!`
+}
+
+const allnames = characters.map((char) => {
+  return char.name
+})
+return allnames
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(listAllCharacters([]));
@@ -61,10 +70,19 @@ function listAllCharacters() {}
  * No example for this one. You should be able to find the average at this point
  */
 
-function averageHeightOfAllCharacters() {}
+function averageHeightOfAllCharacters(characters) {
+  let sum = 0
+  let avg = 0
+   characters.forEach((char)=>{ 
+    let charToNum = Number(char.height)
+    sum += charToNum
+  })
+       avg = sum/characters.length
+   return avg
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
-//console.log(averageHeightOfAllCharacters(characters))
+// console.log(averageHeightOfAllCharacters(characters))
 
 //*************************************************************************************************/
 
@@ -98,7 +116,15 @@ function averageHeightOfAllCharacters() {}
  *
  */
 
-function checkForEyeColor() {}
+function checkForEyeColor(characters,eyes) {
+  if (characters.length === 0) {
+    throw `Eye color ERROR`
+  }
+
+  return characters.some(({eye_color})=> {
+    return eye_color === eyes
+  })
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(checkForEyeColor([]));
@@ -145,12 +171,18 @@ function checkForEyeColor() {}
     ...
   },
   ... as many objects as qualify
- * 
- * 
- *
  */
 
-function getAllCharactersCreatedAfterYear() {}
+function getAllCharactersCreatedAfterYear(characters, date) {
+  const createdYearChar = characters.filter((char)=>{
+    let afterYr = Number(char.created.slice(0, 4))
+     if(afterYr >= date){
+       return char
+     }
+
+  })
+  return createdYearChar
+}
 
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(getAllCharactersCreatedAfterYear(characters, 2016));
@@ -205,8 +237,12 @@ function getAllCharactersCreatedAfterYear() {}
    }
  */
 
-function getCharacterInMovie() {}
-
+function getCharacterInMovie(characters, movie) {
+  if (characters.length === 0 || movie === 0) {
+    throw `Error missing information`
+  }
+  return characters.find(({films}) => films.includes(movie))
+}
 //UNCOMMENT THE LINES ONE AT A TIME BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
 // console.log(getCharacterInMovie(characters, ''));
 // console.log(getCharacterInMovie([], 'The Phantom Menace'));
@@ -225,10 +261,12 @@ function getCharacterInMovie() {}
  *  @returns {Array[]}} - returns an array of arrays.
  */
 
-function homeWorldValues() {}
+function homeWorldValues(characters) {
+
+}
 
 //UNCOMMENT THE LINE BELOW TO TEST YOUR SOLUTION MANUALLY, THEN COMMENT BACK IN
-console.log(homeWorldValues(characters));
+// console.log(homeWorldValues(characters));
 
 //*************************************************************************************************/
 // ****SECOND BONUS
